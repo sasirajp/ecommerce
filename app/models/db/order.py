@@ -1,4 +1,4 @@
-from .base import EcommerceBase, Base
+from app.models.db.base import EcommerceBase
 from sqlalchemy import Column, Integer, ARRAY, Float, Enum
 from app.models.dtos import OrderStatus
 

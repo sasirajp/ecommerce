@@ -11,6 +11,7 @@ from sqlalchemy.exc import SQLAlchemyError
 import queue
 
 order_queue = queue.Queue()
+stop_event = threading.Event()
 
 
 def fetch_pending_orders():
@@ -29,8 +30,8 @@ def fetch_pending_orders():
     threading.Timer(20, fetch_pending_orders).start()
 
 
-def simulate_processing():
-    while True:
+def simulate_processing(stop_event):
+    while not stop_event.is_set():
         try:
             if order_queue.empty():
                 print("No Orders found to process")
@@ -78,5 +79,5 @@ def start_order_processing():
     retry_processing()
 
     for _ in range(1):
-        worker_thread = threading.Thread(target=simulate_processing, daemon=True)
+        worker_thread = threading.Thread(target=simulate_processing, args=(stop_event,), daemon=True)
         worker_thread.start()

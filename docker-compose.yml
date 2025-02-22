@@ -1,6 +1,16 @@
 version: "3.8"
 
 services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    container_name: app
+    volumes:
+      - .:/app
+
   db:
     image: postgres:15
     container_name: ecommerce_postgres
@@ -11,7 +21,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+#      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   postgres_data:
