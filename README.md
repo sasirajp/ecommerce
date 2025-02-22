@@ -29,6 +29,9 @@ docker-compose up
 
 ## API Endpoints
 
+### **Accessing FastAPI Docs**
+`http://localhost:8000/docs`
+
 ### **1. Create an Order**
 ```sh
 curl -X 'POST' \
@@ -57,8 +60,4 @@ curl -X 'GET' \
   'http://localhost:8000/metrics' \
   -H 'accept: application/json'
 ```
-
-
-### **Accessing FastAPI Docs**
-If `http://localhost:8000/docs` is not working, make sure `main.py` is updated with:
 
