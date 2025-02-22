@@ -1,7 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
+
 from app.models.db.order import Order
-from fastapi import HTTPException, status
+from app.exception.exceptions import OrderCreationException, OrderNotFoundException
 
 
 class OrderRepository:
@@ -9,7 +10,10 @@ class OrderRepository:
         self.db = db
 
     def get_order_by_id(self, order_id: int):
-        return self.db.query(Order).filter(Order.order_id == order_id).first()
+        order =  self.db.query(Order).filter(Order.order_id == order_id).first()
+        if not order:
+            raise OrderNotFoundException(f"Order not found with id {order_id}")
+        return order
     
     def create_order(self, new_order: Order):
         try:
@@ -20,15 +24,8 @@ class OrderRepository:
         
         except IntegrityError:
             self.db.rollback()
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Database integrity error"
-            )
-
+            raise OrderCreationException("Order Couldn't be created")
         except Exception as e:
             self.db.rollback()
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"Something went wrong: {str(e)}"
-            )
+            raise OrderCreationException("Order Couldn't be created")
         

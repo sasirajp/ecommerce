@@ -27,3 +27,9 @@ class OrderResponse(BaseModel):
 
 class OrderByStatusCount(BaseModel):
     count: dict[OrderStatus, int]
+
+
+class MetricsReponse(BaseModel):
+    status_count: OrderByStatusCount
+    total_orders: int
+    avg_processing_time: float
