@@ -61,3 +61,28 @@ curl -X 'GET' \
   -H 'accept: application/json'
 ```
 
+
+## Design Decisions and trade-offs
+
+1) Used FastAPI as BE framework & PostgresSQL as db
+    Trade-off
+        Pros - high performance framework and reliable db for structured data
+        Cons - requires additional optimisation - connect db for each request is not optimal, need to implement connection pool.
+2) Used python's queue.Queue and threading for background scheduling
+    Trade-off
+        Pros - python's queue is thread safe which is ideal for this scenario problem statement says to use in memory queue.
+        Cons - Will cause serious issue in distributed env, should be using redis Queue/Kafka
+3) Added worker threads to process orders
+   Trade-off
+        pros - Keeps API responsive, as processing happens in background.
+        cons - For higher scalability, should be shifting to celery workers
+               can also use master-slave architecture where slaves will process orders(for high scalability, mostly not required)
+4) Containerized Application for easy set up.
+
+
+## Assumptions
+1) each order goes through definite cycle PENDING -> PROCESSING -> COMPLETED (Added retry logic if order is stuck for more than 10 mins, only possible if application crashes while processing a order).
+2) Single server and 3 workers are efficient to handle rest service & order processing.
+3) Each Order will be processed between 2 and 7 seconds.
+4) On crash of application, processing will start again for non completed order won't continue orders in the queue.
+5) Avg time is only required for completed orders only as per problem statement.

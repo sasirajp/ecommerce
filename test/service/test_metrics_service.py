@@ -7,9 +7,9 @@ from app.models.dtos import OrderByStatusCount, MetricsReponse, OrderStatus
 
 
 @pytest.fixture()
-def mock_metric_repo_fixture(mocker):
+def mock_metric_repo_fixture():
     mock_repo = MagicMock(spec=OrderMetricsRepository)
-    mock_repo.get_count_orders_by_status.return_value = OrderByStatusCount(count = {
+    mock_repo.get_count_orders_by_status.return_value = OrderByStatusCount(count={
         OrderStatus.PENDING: 2,
         OrderStatus.COMPLETED: 2
     })
@@ -26,7 +26,8 @@ def test_get_metrics(order_metric_service):
     metrics_response = MetricsReponse(
         status_count=OrderByStatusCount(count={
             OrderStatus.PENDING: 2,
-            OrderStatus.COMPLETED: 2
+            OrderStatus.COMPLETED: 2,
+            OrderStatus.PROCESSING: 0
         }),
         total_orders=10,
         avg_processing_time=22.1
