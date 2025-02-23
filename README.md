@@ -92,7 +92,7 @@ curl -X 'GET' \
 1. Each order follows a definite cycle: `PENDING -> PROCESSING -> COMPLETED`.
     - Retry logic is added if an order is stuck for more than 10 minutes (only possible if the application crashes while processing an order).
 2. A single server with three worker threads is efficient to handle REST service and order processing.
-3. Each order processing time ranges between 2 to 7 seconds.
+3. Each order processing time ranges between 2 to 5 seconds.
 4. On application crash, processing will restart for **non-completed orders**, but in-memory queue orders will not persist.
 5. **Average processing time is calculated only for completed orders**, as specified in the problem statement.
 
