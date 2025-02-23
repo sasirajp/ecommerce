@@ -78,6 +78,6 @@ def start_order_processing():
     fetch_pending_orders()
     retry_processing()
 
-    for _ in range(1):
+    for _ in range(3):
         worker_thread = threading.Thread(target=simulate_processing, args=(stop_event,), daemon=True)
         worker_thread.start()
