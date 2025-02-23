@@ -18,13 +18,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 1,
   "links": [],
   "panels": [
     {
       "datasource": {
         "type": "yesoreyeram-infinity-datasource",
-        "uid": "dedx9bijxwxs0e"
+        "uid": "bedyn4ivej9c0a"
       },
       "fieldConfig": {
         "defaults": {
@@ -96,7 +96,7 @@
     {
       "datasource": {
         "type": "yesoreyeram-infinity-datasource",
-        "uid": "dedx9bijxwxs0e"
+        "uid": "bedyn4ivej9c0a"
       },
       "fieldConfig": {
         "defaults": {
@@ -173,7 +173,7 @@
     {
       "datasource": {
         "type": "yesoreyeram-infinity-datasource",
-        "uid": "dedx9bijxwxs0e"
+        "uid": "bedyn4ivej9c0a"
       },
       "fieldConfig": {
         "defaults": {
@@ -245,7 +245,7 @@
     {
       "datasource": {
         "type": "yesoreyeram-infinity-datasource",
-        "uid": "dedx9bijxwxs0e"
+        "uid": "bedyn4ivej9c0a"
       },
       "fieldConfig": {
         "defaults": {
@@ -317,7 +317,7 @@
     {
       "datasource": {
         "type": "yesoreyeram-infinity-datasource",
-        "uid": "dedx9bijxwxs0e"
+        "uid": "bedyn4ivej9c0a"
       },
       "fieldConfig": {
         "defaults": {
@@ -402,6 +402,6 @@
   "timezone": "browser",
   "title": "Metrics Dashboard",
   "uid": "dedvgh1l4fo5cf",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }
