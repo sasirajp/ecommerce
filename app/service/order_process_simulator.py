@@ -27,7 +27,7 @@ def fetch_pending_orders():
     finally:
         db.close()
 
-    threading.Timer(20, fetch_pending_orders).start()
+    threading.Timer(60, fetch_pending_orders).start()
 
 
 def simulate_processing(stop_event):
