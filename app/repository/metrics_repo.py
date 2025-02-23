@@ -25,4 +25,4 @@ class OrderMetricsRepository:
         avg_processing_time = self.db.query(func.avg(extract("epoch", Order.updated_at - Order.created_at))) \
             .filter(Order.status == OrderStatus.COMPLETED) \
             .scalar()
-        return orders_count, avg_processing_time / 60
+        return orders_count, avg_processing_time / 60 if avg_processing_time is not None else 0

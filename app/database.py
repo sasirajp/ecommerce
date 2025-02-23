@@ -12,7 +12,7 @@ PORT = os.getenv('POSTGRES_PORT', 5432)
 DB_NAME = os.getenv('POSTGRES_DB')
 DATABASE_URL = f"postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB_NAME}"
 
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL, pool_size=20, max_overflow=10, pool_timeout=10, pool_recycle=1800,)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
